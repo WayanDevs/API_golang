@@ -15,6 +15,12 @@ type Auth struct {
     CreatedAt   time.Time      `gorm:"type:timestamptz;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
     UpdatedAt   time.Time      `gorm:"type:timestamptz;not null;default:CURRENT_TIMESTAMP" json:"updated_at"`
     DeletedAt   *time.Time     `gorm:"type:timestamptz" json:"deleted_at"`
+
+    // Relationships
+    Confirmations []AuthConfirmation `gorm:"foreignKey:AuthID"`
+    OAuths        []AuthOAuth        `gorm:"foreignKey:AuthID"`
+    ChangeEmails  []AuthChangeEmail  `gorm:"foreignKey:AuthID"`
+    ChangePasswords []AuthChangePassword `gorm:"foreignKey:AuthID"`
 }
 
 // TableName overrides the default table name for Auth
